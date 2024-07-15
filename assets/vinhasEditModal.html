@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="vinhasEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Vinha</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form class="row g-3">
+
+            
+
+
+            <div class="col-md-3">
+              <label for="descricaoVinhaEdit" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="descricaoVinhaEdit">
+            </div>
+            <div class="col-md-3">
+              <label for="haVinhaEdit" class="form-label">ha</label>
+              <input type="number" class="form-control" id="haVinhaEdit">
+            </div>
+            <div class="col-md-3">
+              <label for="dataPlantacaoVinhaEdit" class="form-label">Data Plantação</label>
+              <input type="date" class="form-control" id="dataPlantacaoVinhaEdit">
+            </div>
+            <div class="col-md-3">
+              <label for="pColheitaVinhaEdit" class="form-label">Ano da Primeira Colheita</label>
+              <input type="number" class="form-control" id="pColheitaVinhaEdit">
+            </div>
+            <div class="col-md-6">
+                <label for="fotoVinhaEdit" class="form-label">Foto</label>
+                <input type="file" class="form-control" id="fotoVinhaEdit">
+            </div>
+
+            <div>
+              <img src="" alt="" id="oldVinhaFoto">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="guardaEditVinhas">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
