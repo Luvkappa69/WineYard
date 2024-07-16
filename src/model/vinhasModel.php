@@ -12,7 +12,8 @@
                 $foto,                    //Content
                 'foto',            //Js into PHP variable name
                 "_vinha",                  //Nome do ficheiro
-                md5($descricao)                   //Pasta
+                md5($descricao),                   //Pasta
+                "vinhaLogs"                   //log file name
                 );
             $upload = json_decode($upload, TRUE);
 
@@ -237,7 +238,7 @@
 
 
 
-        function uploads($img, $html_soul, $presetName, $pasta){
+        function uploads($img, $html_soul, $presetName, $pasta, $filename){
 
             $dir = "../imagens/".$pasta."/";
             $dir1 = "src/imagens/".$pasta."/";
@@ -263,7 +264,7 @@
                         $target = $dir.$newName;
                         $targetBD = $dir1.$newName;
         
-                        $this -> wFicheiro($target, "prato_Upload_logs");
+                        $this -> wFicheiro($target, $filename);
                 
                         $flag = move_uploaded_file($fonte, $target);
                         
