@@ -35,6 +35,7 @@ html, body{
 }
 .dropdown-item{
     color: rgb(187, 153, 233);
+    transition: background-color 0.3s;
 }
 .dropdown-item:active{
     color: rgb(172, 110, 190);
@@ -42,7 +43,7 @@ html, body{
 .dropdown-item:hover{
     color: rgb(240, 240, 240);
     border-radius: 10px;
-    background-color: #292e4d;
+    background-color: #292e4d70;
     font-size: 20px;
 }
 .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
