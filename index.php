@@ -20,24 +20,20 @@
 
                 <button class="removeBtn">
                     <img src="src/img/removeVector.svg" alt="Remove Icon">
-                    <span class="remover-text">Remover</span>
                 </button>
 
 
                 <button class="editBtn">
                     <img src="src/img/editVector.svg" alt="Edit Icon">
-                    <span class="edit-text">Editar</span>
                 </button>
 
 
                 <button class="favBtn">
                     <img src="src/img/starVector.svg" alt="Favorite Icon">
-                    <span class="fav-text">Favorito</span>
                 </button>
 
                 <button class="logoutBtn">
                     <img src="src/img/logoutVector.svg" alt="Logout Icon">
-                    <span class="logout-text">Logout</span>
                 </button>
 
 
