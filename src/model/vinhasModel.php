@@ -290,25 +290,53 @@
 
 
 
-        function addCasta($vinho, $casta){
+
+
+
+
+
+
+
+
+
+        function addCasta($vinho, $castas) {
             global $conn;
+        
             $msg = "";
-            $stmt = "";
-
-            $stmt = $conn->prepare("INSERT INTO vinhas_castas (id_vinha, id_casta) 
-                                    VALUES (?, ?);");
-            $stmt->bind_param("ii", $vinho, $casta );
-
-            if ($stmt->execute()) {
-                $msg = "Registado com sucesso!";
-            } else {
-                $msg = "Erro ao registar: " . $stmt->error;  
-            } 
-
+    
+            if (is_string($castas)) {
+                $castas = explode(',', $castas);
+            }
+        
+            $stmt = $conn->prepare("INSERT INTO vinhas_castas (id_vinha, id_casta) VALUES (?, ?);");
+            $stmt->bind_param("ii", $vinho, $id_casta);
+        
+            foreach ($castas as $casta) {
+                $id_casta = trim($casta);  
+                echo $casta;
+                $stmt->execute();
+                $stmt->reset();
+            }
+        
             $stmt->close();
             $conn->close();
             return $msg;
         }
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+        
         function getSelect_vinhas(){
             global $conn;
             $msg = "<option value = '-1'>Escolha uma opção</option>";
@@ -320,12 +348,7 @@
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    if ($row['id'] == 3){
-                        
-                    }else{
-                        $msg .= "<option value = '".$row['id']."'>".$row['descricao']."</option>";
-                    }
-                    
+                    $msg .= "<option value = '".$row['id']."'>".$row['descricao']."</option>"; 
                 }
             } else {
                 $msg .= "<option value = '-1'>Sem vinhas</option>";
@@ -335,23 +358,75 @@
             
             return $msg;
         }
-        function getSelect_castas(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function getlista_castas(){
             global $conn;
-            $msg = "<option value = '-1'>Escolha uma opção</option>";
+            $castas = array();
+        
+            $stmt = $conn->prepare("SELECT * FROM castas;");
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $castas[] = $row['id'];
+                }
+            } else {
+                $castas[] = "Sem dados para efetuar o pedido";
+            }
+            $stmt->close(); 
+            $conn->close();
+        
+            return json_encode($castas);
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function getCheckbox_castas(){
+            global $conn;
+            $msg = "";
             $stmt = "";
 
             $stmt = $conn->prepare("SELECT * FROM castas;");
             $stmt->execute();
             $result = $stmt->get_result();
 
+            $index=0;
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    if ($row['id'] == 3){
-                        
-                    }else{
-                        $msg .= "<option value = '".$row['id']."'>".$row['descricao']."</option>";
-                    }
-                    
+
+                    $msg .= "<div>";
+                    $msg .= "<input type='checkbox' class'form-check-input' id='casta" . $row['id'] . "'>  " ;
+                    $msg .= "<label class='form-check-label'> " . $row['descricao'] . "</label>"  ;
+                    $msg .= "</div>";
+
+
                 }
             } else {
                 $msg .= "<option value = '-1'>Sem Estados</option>";

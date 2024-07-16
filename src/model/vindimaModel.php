@@ -4,45 +4,89 @@
 
     class Vindima{
 
-        function regista( $id_vinha, $id_funcionario, $kg, $data,$time, $ano) {
+        function regista($id_vinha, $id_funcionario, $kg, $data, $time, $ano) {
             global $conn;
-
-            $stmt0 = "";
-            $stmt0 = $conn->prepare("SELECT * from vinha, ano
-                                    where vinha.id= ? and ano.id=?;");
+        
+            $stmt0 = $conn->prepare("SELECT vinha.descricao AS descricao_vinha, ano.descricao AS ano
+                                     FROM vinha, ano
+                                     WHERE vinha.id = ? AND ano.id = ?");
             $stmt0->bind_param("ii", $id_vinha, $ano);
             $stmt0->execute();
             $result0 = $stmt0->get_result();
-
+        
             if ($result0->num_rows > 0) {
-                while ($row0 = $result0->fetch_assoc()) {
-                    if ($row0['ano_p_colheita'] >= $row0['descricao']) {
-                        //pass
-                    }else{
-                        echo "vinha -" . $row0['data_plantacao'] . "- teve colheita a " . $row0['ano_p_colheita'] . ". O ano da vindima precisa ser menor";
-                        return;
+                $row0 = $result0->fetch_assoc();
+                $nome_da_vinha = $row0['descricao_vinha'] . " " . $row0['ano'];
+                $stmt0->close();
+        
+                $stmt1 = $conn->prepare("SELECT * FROM vinha WHERE id = ?");
+                $stmt1->bind_param("i", $id_vinha);
+                $stmt1->execute();
+                $result1 = $stmt1->get_result();
+        
+                if ($result1->num_rows > 0) {
+                    $row1 = $result1->fetch_assoc();
+                    if ($row1['ano_p_colheita'] >= $ano) {
+                        $dth = $data . " " . $time . ":00";
+                        $stmt2 = $conn->prepare("INSERT INTO vindima (id_vinha, id_funcionario, kg, dth, id_ano) 
+                                                 VALUES (?,?,?,?,?);");
+                        $stmt2->bind_param("iiisi", $id_vinha, $id_funcionario, $kg, $dth, $ano);
+        
+                        if ($stmt2->execute()) {
+                            $vindima_id = $stmt2->insert_id;
+                            $stmt2->close();
+        
+                            $total = $kg / 2; 
+                            $stmt3 = $conn->prepare("INSERT INTO vinhos (total, id_vindima, nome) VALUES (?, ?, ?)");
+                            $nome_vinho = $nome_da_vinha; 
+                            $stmt3->bind_param("iss", $total, $vindima_id, $nome_vinho);
+        
+                            if ($stmt3->execute()) {
+                                $msg = "Registado com sucesso!";
+                            } else {
+                                $msg = "Erro ao registar vinho: " . $stmt3->error;
+                            }
+        
+                            $stmt3->close();
+                        } else {
+                            $msg = "Erro ao registar vindima: " . $stmt2->error;
+                        }
+                    } else {
+                        $msg = "A vinha teve colheita em " . $row1['ano_p_colheita'] . ". O ano da vindima precisa ser menor.";
                     }
-                }
-                $dth = $data. " ".$time.":00";
-                $msg = "";
-                $stmt = "";
-    
-                $stmt = $conn->prepare("INSERT INTO vindima (id_vinha, id_funcionario, kg, dth, id_ano) 
-                                        VALUES (?,?,?,?,?);");
-                $stmt->bind_param("iiisi", $id_vinha, $id_funcionario, $kg, $dth, $ano);
-    
-                if ($stmt->execute()) {
-                    $msg = "Registado com sucesso!";
                 } else {
-                    $msg = "Erro ao registar: " . $stmt->error;  
-                } 
-                $stmt->close();
+                    $msg = "Vinha não encontrada.";
+                }
+        
+                $stmt1->close();
+            } else {
+                $msg = "Combinação de vinha e ano não encontrada.";
             }
-
-            $stmt0->close();
+        
             $conn->close();
-            
+        
+            return $msg;
         }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         function registaAno($registaAno){
             global $conn;

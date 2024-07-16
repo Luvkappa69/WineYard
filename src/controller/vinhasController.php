@@ -53,14 +53,19 @@ else if($_POST['op'] == 6){
 
 
 
+else if($_POST['op'] == 31){
+    $resultado = $execute -> getlista_castas();
+    echo($resultado);
+}
+else if($_POST['op'] == 30){
+    $resultado = $execute -> getCheckbox_castas();
+    echo($resultado);
+}
 else if($_POST['op'] == 10){
     $resultado = $execute -> getSelect_vinhas();
     echo($resultado);
 }
-else if($_POST['op'] == 11){
-    $resultado = $execute -> getSelect_castas();
-    echo($resultado);
-}
+
 
 
 

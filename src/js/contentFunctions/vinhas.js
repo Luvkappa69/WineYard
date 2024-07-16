@@ -228,6 +228,13 @@ function alerta(icon, msg) {
         
 
 
+
+
+
+
+
+
+
   
 function openCastaModal(id_vinho){
 
@@ -239,16 +246,103 @@ function openCastaModal(id_vinho){
 }
 
 
-function addCasta(idVinho){
-  if($('#addCastaCasta').val() == ""){
-    return alerta("error", "Por favor escolha uma casta");
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addCasta(idVinho) {
+
+  
+  let data1 = new FormData();
+  data1.append('op', 31);
+  $.ajax({
+    url: controllerPath,
+    method: "POST",
+    data: data1,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false,
+  })
+
+
+
+
+    .done(function (msg) {
+      let castas = JSON.parse(msg)
+      getSelection(castas, idVinho)
+      
+    })
+    
+
+    .fail(function (jqXHR, textStatus) {
+      alert("Request failed: " + textStatus);
+    });
+
+  
+}
+
+
+function getSelection(ids, idVinho){
+  let escolhido = []
+  ids.forEach((id, index) => {
+    if ($("#casta" + (index+1)).is(":checked")) {
+        escolhido.push(id)
+    }})
+    if (escolhido.length == 0) {
+      alerta("error", "Escolha pelo menos uma casta")
+      return
   }
-  let dados = new FormData();
-  console.log($('#addCastaCasta').val())
+
+  console.log(escolhido)
+  var dados = new FormData();
   dados.append('addCastaVinha', idVinho);
-  dados.append('addCastaCasta', $('#addCastaCasta').val());
+  dados.append('addCastaCasta', escolhido);
   dados.append('op', 6);
 
+  $.ajax({
+      url: controllerPath,
+      method: "POST",
+      data: dados,
+      dataType: "html",
+      cache: false,
+      contentType: false,
+      processData: false,
+  })
+  .done(function(msg) {
+      alerta("success", msg);
+      listagem();
+  })
+  .fail(function(jqXHR, textStatus) {
+      alert("Request failed: " + textStatus);
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function fetchCastaOptions() {
+  let dados = new FormData();
+  dados.append('op', 30);
   $.ajax({
     url: controllerPath,
     method: "POST",
@@ -258,16 +352,20 @@ function addCasta(idVinho){
     contentType: false,
     processData: false,
   })
-
     .done(function (msg) {
-      alerta("success", msg);
-      listagem();
+      $('#checkboxContainer').html(msg);
     })
 
     .fail(function (jqXHR, textStatus) {
       alert("Request failed: " + textStatus);
     });
 }
+
+
+
+
+
+
 
 
 function getSelect_vinhas() {
@@ -291,32 +389,14 @@ function getSelect_vinhas() {
     });
 }
 
-function getSelect_castas() {
-  let dados = new FormData();
-  dados.append('op', 11);
-  $.ajax({
-    url: controllerPath,
-    method: "POST",
-    data: dados,
-    dataType: "html",
-    cache: false,
-    contentType: false,
-    processData: false,
-  })
-    .done(function (msg) {
-      $('#addCastaCasta').html(msg);
-    })
-    .fail(function (jqXHR, textStatus) {
-      alert("Request failed: " + textStatus);
-    });
-}
+
 
 
         
 $(function () {
   listagem();
-  getSelect_castas()
   getSelect_vinhas()
+  fetchCastaOptions();
 });
 
 
