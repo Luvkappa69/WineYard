@@ -12,7 +12,7 @@
     <?php include_once 'assets/main/simpleNavBar.php' ?>
     
     <div class="container">
-        <div class="row mx-5 mb-5">
+        <div class="row mx-5 mb-5 vh-100 d-flex align-items-center">
             <div id="tableFuncionariosContainer"></div>
         </div>
     </div>

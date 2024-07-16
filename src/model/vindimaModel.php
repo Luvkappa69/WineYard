@@ -1,39 +1,51 @@
 <?php
     require_once 'utilities/connection.php';
+    require_once 'utilities/validadores.php';
 
     class vinha{
 
         function regista( $id_vinha, $id_funcionario, $kg, $data,$time, $ano) {
             global $conn;
 
-            $dth = $data. " ".$time;
-            echo $dth;
-            $msg = "";
-            $stmt = "";
+      
+            $msg0 = "";
+            $stmt0 = "";
+            $stmt0 = $conn->prepare("SELECT * from vinha, ano
+                                    where vinha.id= ? and ano.id=?;");
+            $stmt0->bind_param("ii", $id_vinha, $ano);
+            $stmt0->execute();
+            $result0 = $stmt0->get_result();
 
-            $stmt = $conn->prepare("INSERT INTO vindima (id_vinha, id_funcionario, kg, dth, id_estado) 
-                                    VALUES (?,?,?,?,?);");
-            $stmt->bind_param("iiisi", $id_vinha, $id_funcionario, $kg, $dth, $ano);
+            if ($result0->num_rows > 0) {
+                while ($row0 = $result0->fetch_assoc()) {
+                    if ($row0['ano_p_colheita'] >= $row0['descricao']) {
+                        //pass
+                    }else{
+                        echo "vinha -" . $row0['data_plantacao'] . "- teve colheita a " . $row0['ano_p_colheita'] . ". O ano da vindima precisa ser menor";
+                        return;
+                    }
+                }
+                $dth = $data. " ".$time.":00";
+                $msg = "";
+                $stmt = "";
+    
+                $stmt = $conn->prepare("INSERT INTO vindima (id_vinha, id_funcionario, kg, dth, id_ano) 
+                                        VALUES (?,?,?,?,?);");
+                $stmt->bind_param("iiisi", $id_vinha, $id_funcionario, $kg, $dth, $ano);
+    
+                if ($stmt->execute()) {
+                    $msg = "Registado com sucesso!";
+                } else {
+                    $msg = "Erro ao registar: " . $stmt->error;  
+                } 
+                $stmt->close();
+            }
 
-            if ($stmt->execute()) {
-                $msg = "Registado com sucesso!";
-            } else {
-                $msg = "Erro ao registar: " . $stmt->error;  
-            } 
-
-            $stmt->close();
+            $stmt0->close();
             $conn->close();
-            return $msg;
+            
         }
         
-
-
-
-
-
-
-
-
 
         
         function lista() {
@@ -58,9 +70,9 @@
                                     funcionarios.nome as funNome,
                                     vinha.descricao as vinhaDesc,
                                     ano.descricao as anoDesc
-                                    from vindimas, funcionarios, ano
-                                    where vindimas.id_vinha = vinha.id
-                                    vindima.id_funcionario = funcionario.id
+                                    from vindima, funcionarios, ano
+                                    where vindima.id_vinha = vinha.id
+                                    vindima.id_funcionario = funcionario.bi
                                     vindima.id_ano = ano.id"); 
 
         
@@ -80,7 +92,9 @@
                     $msg .= "<td>" . $row['anoDesc'] . "</td>";
 
 
-                    $msg .= "<td><button type='button' class='btn btn-danger' onclick='remover(" . $row['id'] . ")'>Remover</button></td>";
+                    $msg .= "<td><button type='button' class='removeBtn' onclick='remover(" . $row['id'] . ")'>Remover</button></td>";
+
+
                     $msg .= "</tr>";
                 } 
             } else {

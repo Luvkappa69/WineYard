@@ -1,6 +1,7 @@
 body{
     background-image: linear-gradient(to bottom, #ffffff 25%, hsl(278, 21%, 51%) 100%);
     color: #000000;
+    height:980px;
 }
 
 .nav-link{
@@ -72,3 +73,12 @@ select {
     width: 100%;
 }
 
+
+
+.smallOne{
+    width: 300px;
+}
+
+.table-dark{
+    color: #000000;
+}

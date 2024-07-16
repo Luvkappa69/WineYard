@@ -51,7 +51,7 @@
         
         function lista() {
             global $conn;
-            $msg = "<table class='table' id='tableVinhas'>";
+            $msg = "<table class='table-dark' id='tableVinhas'>";
             $msg .= "<thead>";
             $msg .= "<tr>";
         
@@ -87,9 +87,10 @@
                     $msg .= "<td>" . $row['ano_p_colheita'] . "</td>";
 
 
-                    $msg .= "<td><button type='button' class='btn btn-danger' onclick='remover(" . $row['id'] . ")'>Remover</button></td>";
-                    $msg .= "<td><button type='button' class='btn btn-primary' onclick='edita(" . $row['id'] . ")'>Editar</button></td>";
-                    $msg .= "<td><button type='button' class='btn btn-primary' onclick='openCastaModal(" . $row['id'] . ")'>Casta</button></td>";
+                    $msg .= "<td><button type='button' class='removeBtn' onclick='remover(" . $row['id'] . ")'><img src='src/img/removeVector.svg' alt='Remove Icon'></button></td>";
+                    $msg .= "<td><button type='button' class='editBtn' onclick='edita(" . $row['id'] . ")'><img src='src/img/editVector.svg' alt='Remove Icon'></button></td>";
+                    $msg .= "<td><button type='button' class='favBtn' onclick='openCastaModal(" . $row['id'] . ")'><img src='src/img/starVector.svg' alt='Remove Icon'></button></td>";
+
                     $msg .= "</tr>";
                 } 
             } else {

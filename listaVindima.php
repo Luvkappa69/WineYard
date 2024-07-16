@@ -12,12 +12,10 @@
     <?php include_once 'assets/main/simpleNavBar.php' ?>
     
     <div class="container">
-        <div class="row mx-5 mb-5">
-            <div id="tableVinhasContainer"></div>
+        <div class="row mx-5 mb-5 vh-100 d-flex align-items-center">
+            <div id="tableVindimasContainer"></div>
         </div>
     </div>
     
-    <?php include_once 'assets/vinhasEditModal.html' ?>
-    <?php include_once 'assets/addCastaModal.html' ?>
 </body>
 </html>

@@ -6,7 +6,7 @@
   display: inline-block;
   text-align: center; 
   min-width: 25px; 
-  transition: min-width 0.3s ease; 
+
 }
 .removeBtn img {
   width: 25px; 
@@ -25,12 +25,11 @@
   padding-bottom: 3px;
 }
 .removeBtn:hover {
-  min-width: 120px; 
   background: linear-gradient(to right, rgba(129, 69, 62, 0.979), rgb(219, 41, 41));
   box-shadow: 0px 0px 15px 5px rgb(207, 46, 86);
 }
 .removeBtn:hover img {
-  opacity: 0; 
+  width: 28px;
 }
 .removeBtn:hover .remover-text {
   display: block; 
@@ -39,7 +38,7 @@
   background-color: brown;
 }
 .removeBtn:active .remover-text{
-padding-top: 5px;
+  padding-top: 5px;
 }
 
 
@@ -53,7 +52,6 @@ padding-top: 5px;
   display: inline-block;
   text-align: center; 
   min-width: 25px; 
-  transition: min-width 0.3s ease;
 }
 .editBtn img {
   width: 25px; 
@@ -72,12 +70,11 @@ padding-top: 5px;
   padding-bottom: 3px;
 }
 .editBtn:hover {
-  min-width: 120px; 
   background: linear-gradient(to right, rgba(56, 154, 167, 0.979),rgb(64, 101, 223));
   box-shadow: 0px 0px 15px 5px rgb(46, 129, 207);
 }
 .editBtn:hover img {
-  opacity: 0; 
+  width: 28px; 
 }
 .editBtn:hover .edit-text {
   display: block; 
@@ -100,7 +97,6 @@ padding-top: 5px;
   display: inline-block;
   text-align: center; 
   min-width: 25px; 
-  transition: min-width 0.3s ease;
 }
 .favBtn img {
   width: 25px; 
@@ -119,12 +115,11 @@ padding-top: 5px;
   padding-bottom: 3px;
 }
 .favBtn:hover {
-  min-width: 120px; 
   background: linear-gradient(to right, rgba(160, 167, 56, 0.979),rgb(223, 199, 64));
   box-shadow: 0px 0px 15px 5px rgb(217, 219, 88);
 }
 .favBtn:hover img {
-  opacity: 0; 
+ width: 28px;
 }
 .favBtn:hover .fav-text {
   display: block; 
@@ -149,7 +144,6 @@ padding-top: 5px;
   display: inline-block;
   text-align: center; 
   min-width: 25px; 
-  transition: min-width 0.3s ease;
 }
 .logoutBtn img {
   width: 25px; 
@@ -168,12 +162,11 @@ padding-top: 5px;
   padding-bottom: 3px;
 }
 .logoutBtn:hover {
-  min-width: 120px; 
   background: linear-gradient(to right, rgba(151, 151, 151, 0.979), rgb(104, 104, 104));
   box-shadow: 0px 0px 15px 5px rgb(107, 101, 103);
 }
 .logoutBtn:hover img {
-  opacity: 0; 
+width: 28px;
 }
 .logoutBtn:hover .logout-text {
   display: block; 

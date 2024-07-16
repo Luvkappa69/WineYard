@@ -19,7 +19,7 @@ function regista() {
   dados.append('kg', $('#kg').val());
   dados.append('data', $('#data').val());
   dados.append('time', $('#tempo').val());
-  dados.append('id_estado', $('#id_estado').val());
+  dados.append('id_ano', $('#id_ano').val());
 
   
   dados.append('op', 1);

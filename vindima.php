@@ -55,6 +55,25 @@
       </div>
     </div>
 
+    <div class="container my-5 smallOne">
+    <div class="card">
+      <div class="card-header">
+        Novo Ano
+      </div>
+      <div class=" col-md-6 mx-5 my-5">
+
+
+            <label for="novoAno" class="form-label">Ano</label>
+            <input type="number" class="form-control" id="novoAno">
+
+
+          <div class="col-12">
+            <button type="button" class="btn btn-primary" onclick="registaAno()">Registar</button>
+          </div>
+
+      </div>
+    </div>
+
     
 
 

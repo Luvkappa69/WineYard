@@ -12,7 +12,7 @@
     <?php include_once 'assets/main/simpleNavBar.php' ?>
     
     <div class="container">
-        <div class="row mx-5 mb-5">
+        <div class="row mx-5 mb-5 ">
             <div id="tableVinhasContainer"></div>
         </div>
     </div>

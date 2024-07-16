@@ -11,7 +11,7 @@ if($_POST['op'] == 1){
                                                 $_POST['kg'], 
                                                 $_POST['data'], 
                                                 $_POST['time'], 
-                                                $_POST['id_estado']
+                                                $_POST['id_ano']
     );
     echo($resultado);
 }else if($_POST['op'] == 2){
