@@ -46,6 +46,37 @@ function regista() {
 
 }
         
+function registaAno() {
+  if ($('#novoAno').val() ==""){
+    return alerta("error", "Por favor preencha os campos ...");
+  }
+
+  let dados = new FormData();
+  dados.append('novoAno', $('#novoAno').val());
+  dados.append('op', 20);
+
+  $.ajax({
+    url: controllerPath,
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false,
+  })
+  .done(function (msg) {
+
+    alerta("success", msg);
+    listagem();
+    getSelect_ano()
+
+  })
+
+  .fail(function (jqXHR, textStatus) {
+    alert("Request failed: " + textStatus);
+  });
+
+}
 
 
 

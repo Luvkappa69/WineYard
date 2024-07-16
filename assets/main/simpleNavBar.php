@@ -38,6 +38,9 @@
                         </ul>
                     </li>
                 <?php endforeach; ?>
+                <li class="nav-item <?= isActive('vinho.php') ?>">
+                    <a class="nav-link" href="vinho.php" role="button" aria-expanded="false">Stock</a>
+                </li>
             </ul>
         </div>
     </div>

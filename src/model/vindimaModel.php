@@ -2,13 +2,11 @@
     require_once 'utilities/connection.php';
     require_once 'utilities/validadores.php';
 
-    class vinha{
+    class Vindima{
 
         function regista( $id_vinha, $id_funcionario, $kg, $data,$time, $ano) {
             global $conn;
 
-      
-            $msg0 = "";
             $stmt0 = "";
             $stmt0 = $conn->prepare("SELECT * from vinha, ano
                                     where vinha.id= ? and ano.id=?;");
@@ -45,15 +43,37 @@
             $conn->close();
             
         }
+
+        function registaAno($registaAno){
+            global $conn;
+            $msg = "";
+            $stmt = "";
+
+            $stmt = $conn->prepare("INSERT INTO ano (descricao) 
+                                    VALUES (?);");
+            $stmt->bind_param("i", $registaAno);
+
+
+            if ($stmt->execute()) {
+                $msg = "Registado com sucesso!";
+            } else {
+                $msg = "Erro ao registar: " . $stmt->error;  
+            } 
+
+            $stmt->close();
+            $conn->close();
+            return $msg;
+        }
         
 
         
         function lista() {
             global $conn;
-            $msg = "<table class='table' id='tableVindimas'>";
+            $msg = "<table class='table-dark' id='tableVindimas'>";
             $msg .= "<thead>";
             $msg .= "<tr>";
         
+            $msg .= "<th>Foto</th>";
             $msg .= "<th>Vinha</th>";
             $msg .= "<th>Funcionário</th>";
             $msg .= "<th>Kg</th>";
@@ -69,10 +89,11 @@
             $stmt = $conn->prepare("SELECT vindima.*, 
                                     funcionarios.nome as funNome,
                                     vinha.descricao as vinhaDesc,
-                                    ano.descricao as anoDesc
-                                    from vindima, funcionarios, ano
-                                    where vindima.id_vinha = vinha.id
-                                    vindima.id_funcionario = funcionario.bi
+                                    ano.descricao as anoDesc,
+                                    vinha.foto AS foto
+                                    from vindima, funcionarios, ano, vinha
+                                    where vindima.id_vinha = vinha.id and 
+                                    funcionarios.bi = vindima.id_funcionario and
                                     vindima.id_ano = ano.id"); 
 
         
@@ -84,6 +105,7 @@
                 while ($row = $result->fetch_assoc()) {
                     $msg .= "<tr>";
 
+                    $msg .= "<td><img src=".$row['foto']." class='img-thumbnail img-size'></td>";
 
                     $msg .= "<th scope='row'>" . $row['vinhaDesc'] . "</th>";
                     $msg .= "<td>" . $row['funNome'] . "</td>";
@@ -92,7 +114,7 @@
                     $msg .= "<td>" . $row['anoDesc'] . "</td>";
 
 
-                    $msg .= "<td><button type='button' class='removeBtn' onclick='remover(" . $row['id'] . ")'>Remover</button></td>";
+                    $msg .= "<td><button type='button' class='removeBtn' onclick='remover(" . $row['id'] . ")'><img src='src/img/removeVector.svg' alt='Remove Icon'></button></td>";
 
 
                     $msg .= "</tr>";
@@ -100,7 +122,7 @@
             } else {
                 $msg .= "<tr>";
 
-
+                $msg .= "<td>Sem resultados</td>"; 
                 $msg .= "<th scope='row'>Sem resultados</th>";
                 $msg .= "<td>Sem resultados</td>";                   
                 $msg .= "<td>Sem resultados</td>";                   
@@ -135,20 +157,61 @@
         
         function remove($codigo) {
             global $conn;
+            $row0 ="";
+            $row1 ="";
+
             $msg = "";
-            $stmt = "";
-        
-            $stmt = $conn->prepare("DELETE FROM vindima
-                                    WHERE id = ?");
-            $stmt->bind_param("i", $codigo); 
-        
-            if ($stmt->execute()) {
-                $msg = "Removido com sucesso!";
+            $stmt0 = "";
+            $stmt0 = $conn->prepare("SELECT id_funcionario FROM vindima WHERE id = ?");
+            $stmt0->bind_param("i", $codigo);
+            $stmt0->execute();
+            $result0 = $stmt0->get_result();
+            if ($result0->num_rows > 0) {
+                $row0 = $result0->fetch_assoc();
+                $id_funcionario = $row0['id_funcionario'];
             } else {
-                $msg = "Erro ao remover: " . $stmt->error; 
+                $msg = "Nao foi possivel efetuar o pedido 1";
+                $stmt0->close();
+                return $msg;
             }
-        
-            $stmt->close();
+            $stmt0->close();
+
+            echo $msg;
+
+            $msg = "";
+            $stmt1="";
+            $stmt1 = $conn->prepare("SELECT id_estado FROM funcionarios WHERE bi = ?");
+            $stmt1->bind_param("i", $id_funcionario);
+            $stmt1->execute();
+            $result1 = $stmt1->get_result();
+            if ($result1->num_rows > 0) {
+                $row1 = $result1->fetch_assoc();
+                $id_estado = $row1['id_estado'];
+            } else {
+                $msg = "Nao foi possivel efetuar o pedido 2";
+                return $msg;
+            }
+            $stmt1->close();
+
+
+
+            if ($id_estado  == 2){
+                $msg = "";
+                $stmt = "";
+                $stmt = $conn->prepare("DELETE FROM vindima
+                                        WHERE id = ?");
+                $stmt->bind_param("i", $codigo); 
+                if ($stmt->execute()) {
+                    $msg = "Removido com sucesso!";
+                } else {
+                    $msg = "Erro ao remover: " . $stmt->error; 
+                }
+                $stmt->close();
+            }else{
+                $msg = "O funcionário asssociado tem estado 'Ativo'";
+            }
+            
+
             $conn->close();
             return $msg;
         }

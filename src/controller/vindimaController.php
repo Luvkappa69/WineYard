@@ -2,7 +2,7 @@
 require_once '../model/vindimaModel.php';
 
 
-$execute =  new Vinha();
+$execute =  new Vindima();
 
 if($_POST['op'] == 1){
     $resultado = $execute -> regista(
@@ -39,6 +39,9 @@ else if($_POST['op'] == 11){
 }
 else if($_POST['op'] == 12){
     $resultado = $execute -> getSelect_ano();
+    echo($resultado);
+}else if($_POST['op'] == 20){
+    $resultado = $execute -> registaAno($_POST['novoAno']);
     echo($resultado);
 }
 

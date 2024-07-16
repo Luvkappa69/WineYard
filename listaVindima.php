@@ -4,7 +4,7 @@
 <head>
     <?php include_once 'assets/main/docHead.html' ?>
 
-    <script src="src/js/contentFunctions/vinhas.js"></script>
+    <script src="src/js/contentFunctions/vindima.js"></script>
 
 </head>
 
