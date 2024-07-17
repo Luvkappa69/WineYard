@@ -28,7 +28,7 @@
         
         function lista_f() {
             global $conn;
-            $msg = "<table class='table' id='tableFuncionarios'>";
+            $msg = "<table class='table-dark' id='tableFuncionarios'>";
             $msg .= "<thead>";
             $msg .= "<tr>";
         
