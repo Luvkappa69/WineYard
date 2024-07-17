@@ -41,6 +41,9 @@
                 <li class="nav-item <?= isActive('vinho.php') ?>">
                     <a class="nav-link" href="vinho.php" role="button" aria-expanded="false">Stock</a>
                 </li>
+                <li class="nav-item <?= isActive('account.php') ?>">
+                    <a class="nav-link" href="main.php" role="button" aria-expanded="false">Account</a>
+                </li>
             </ul>
         </div>
     </div>

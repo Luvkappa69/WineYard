@@ -1,3 +1,8 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['utilizador'])){ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,3 +61,9 @@
 
 </body>
 </html>
+<?php 
+}else{
+    echo "sem permissão!";
+}
+
+?>

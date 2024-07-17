@@ -1,3 +1,8 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['utilizador'])){ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,3 +46,9 @@
         <?php include_once 'assets/addCastaModal.html' ?>
 </body>
 </html>
+<?php 
+}else{
+    echo "sem permissão!";
+}
+
+?>
