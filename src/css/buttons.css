@@ -1,7 +1,7 @@
 .removeBtn {
   border-radius: 20px;
   border: 0px;
-  background-image: linear-gradient(to top, hsl(268, 53%, 38%) 0%, rgb(101, 78, 202) 25%,rgb(71, 124, 223) 75%, hsl(194, 54%, 55%) 100%);  padding: 10px 15px; 
+  background-image: linear-gradient(to top, hsl(325, 38%, 47%) 0%, rgb(202, 78, 109) 25%,rgb(119, 51, 65) 75%, hsl(345, 54%, 55%) 100%);  padding: 10px 15px; 
   position: relative;
   display: inline-block;
   text-align: center; 
@@ -47,7 +47,7 @@
 .editBtn {
   border-radius: 20px;
   border: 0px;
-  background-image: linear-gradient(to top, hsl(268, 53%, 38%) 0%, rgb(101, 78, 202) 25%,rgb(71, 124, 223) 75%, hsl(194, 54%, 55%) 100%);  padding: 10px 15px; 
+  background-image: linear-gradient(to top, hsl(214, 53%, 38%) 0%, rgb(78, 167, 202) 25%,rgb(124, 71, 223) 75%, hsl(216, 54%, 55%) 100%);  padding: 10px 15px; 
   position: relative;
   display: inline-block;
   text-align: center; 
@@ -92,7 +92,7 @@ padding-top: 5px;
 .favBtn {
   border-radius: 20px;
   border: 0px;
-  background-image: linear-gradient(to top, hsl(268, 53%, 38%) 0%, rgb(101, 78, 202) 25%,rgb(71, 124, 223) 75%, hsl(194, 54%, 55%) 100%);  padding: 10px 15px; 
+  background-image: linear-gradient(to top, hsl(59, 53%, 38%) 0%, rgb(202, 144, 78) 25%,rgb(126, 113, 41) 75%, hsl(59, 54%, 55%) 100%);  padding: 10px 15px; 
   position: relative;
   display: inline-block;
   text-align: center; 
@@ -139,7 +139,7 @@ padding-top: 5px;
 .logoutBtn {
   border-radius: 20px;
   border: 0px;
-  background-image: linear-gradient(to top, hsl(268, 53%, 38%) 0%, rgb(101, 78, 202) 25%,rgb(71, 124, 223) 75%, hsl(194, 54%, 55%) 100%);  padding: 10px 15px; 
+  background-image: linear-gradient(to right, hsl(268, 10%, 47%) 0%, rgb(47, 45, 58) 25%,rgb(201, 201, 201) 75%, hsl(0, 0%, 82%) 100%);  padding: 10px 15px; 
   position: relative;
   display: inline-block;
   text-align: center; 

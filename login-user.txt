@@ -1,0 +1,13 @@
+To User:
+
+TABLE tipouser:
+	id_user (PK)
+	descricao_user (ADMIN, USER)
+
+
+TABLE utilizador:
+	id (PK)
+	user(username)
+	pw (type text)
+	idtuser (user type) from tipouser
+	foto (type text) - route
