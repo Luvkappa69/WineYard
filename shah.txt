@@ -1,0 +1,10 @@
+recuperar pass
+bloqueio tentativas
+autenticacao
+
+ecryptAES256()
+openssl
+(encrypt / decrypt)
+
+
+crypto.js (node.js)
