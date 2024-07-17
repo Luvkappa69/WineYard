@@ -287,9 +287,10 @@ function addCasta(idVinho) {
     .fail(function (jqXHR, textStatus) {
       alert("Request failed: " + textStatus);
     });
-
-  
 }
+
+
+
 
 
 function getSelection(ids, idVinho){

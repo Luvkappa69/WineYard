@@ -197,7 +197,8 @@
                 $foto,                    //Content
                 'foto',            //Js into PHP variable name
                 "_vinha",                  //Nome do ficheiro
-                md5($descricao)                   //Pasta
+                md5($descricao),                   //Pasta
+                "vinhaLogs"                   //log file name
                 );
             $upload = json_decode($upload, TRUE);
 
